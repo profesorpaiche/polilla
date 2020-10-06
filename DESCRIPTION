@@ -1,0 +1,22 @@
+Package: polilla
+Title: Find grids that intersects polygons
+Version: 0.1.0
+Authors@R: 
+    person(given = "Gigas",
+           family = "Arapaima",
+           role = c("aut", "cre"),
+           email = "profe.paiche@gmail.com")
+Description: This little package (just 2 functions) takes gridded data and finds all 
+    the grids that intersects a polygon. Also, it calculates the fraction of the grid
+    that is inside of the polygon.
+License: `use_gpl3_license()` 
+Imports:
+    ncdf4,
+    raster
+Depends:
+    dplyr,
+    sf
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
