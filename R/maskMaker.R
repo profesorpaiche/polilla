@@ -136,7 +136,7 @@ maskMaker = function(grid, shp,
 			dplyr::select(-geometry) %>%
 			as_tibble()
 
-		write.csv(shp_tab, name_peso, row.names = FALSE)
+		write.csv(shp_tab, weights, row.names = FALSE)
 
 	}
 	
