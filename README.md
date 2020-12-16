@@ -16,7 +16,7 @@ For this example, we will be using some polygons from the Amazon jungle (as
 a shape file) and precipitation data from the same place (as a netCDF file). You
 can download this sample date from:
 
-link
+https://drive.google.com/file/d/1GoN8CXBNEP4zbLVurGjkDqGnmCjYvB_3/view?usp=sharing
 
 Now, loading the needed packages and data:
 
