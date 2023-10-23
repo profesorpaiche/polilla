@@ -4,34 +4,20 @@
 \alias{gridMaker}
 \title{Create grid with polygons}
 \usage{
-gridMaker(
-  rtr = NULL,
-  lon = NULL,
-  lat = NULL,
-  type = "grid",
-  scr = 4326,
-  export = FALSE,
-  name = "malla.shp"
-)
+gridMaker(grid, crs = 4326, export = FALSE, name = "malla.shp")
 }
 \arguments{
-\item{rtr}{Raster image from raster package.}
+\item{grid}{Raster image or points (in a grid configuration, from lower-left
+to uper-right).}
 
-\item{lon}{Numeric vector with longitude values.}
-
-\item{lat}{Numeric vector with latitude values.}
-
-\item{type}{String. If "grid" selected, it will take the values from lon and
-lat to create the polygons. If "raster", it will use the raster dimensions.}
-
-\item{scr}{Integer. EPSG code for polygons.}
+\item{crs}{Integer or String. EPSG code or PROJ4 string for polygons.}
 
 \item{export}{Logic. Save the polygons in file.}
 
 \item{name}{String. Name of the file to be exported.}
 }
 \value{
-polygons.
+Grid as polygons
 }
 \description{
 This function takes each grid from longitude and latitude vectors or a raster
