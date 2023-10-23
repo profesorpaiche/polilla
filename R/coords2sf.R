@@ -14,10 +14,19 @@
 #' @export
 
 coords2sf = function(lon, lat, crs) {
-    lonlat_sf = data.frame(lon = c(lon), lat = c(lat)) |>
+    ndims = length(dim(lon))
+    if (ndims == 1) {
+        lonlat = expand.grid(lon = c(lon), lat = c(lat), KEEP.OUT.ATTRS = FALSE) |>
+            as.data.frame()
+    } else if (ndims == 2) {
+        lonlat = data.frame(lon = c(lon), lat = c(lat))
+    } else {
+        stop("coordinates have more than 2 dimensions")
+    }
+
+    lonlat_sf = lonlat |>
         sf::st_as_sf(coords = c("lon", "lat")) |>
         sf::st_geometry() |>
         sf::st_sfc(crs = crs)
     return(lonlat_sf)
-    # FIXME: Include a mathod for regular coordinates
 }
