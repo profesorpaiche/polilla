@@ -20,6 +20,6 @@ getWeights = function(grid, shp) {
             weights = area_fraction / sum(area_fraction)
         ) |>
         as.data.frame() |>
-        dplyr::select(ID, weights)
+        dplyr::select(id, weights)
     return(intersection)
 }

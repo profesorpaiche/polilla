@@ -60,12 +60,16 @@ gridMaker = function(grid, crs = 4326, export = FALSE, name = "malla.shp") {
             crs = crs,
             what = "polygons"
         )
+
+    if (any(names(grid) == "id")) {
+        ids = dplyr::pull(grid, id)
+    } else {
+        ids = seq_along(boundaries)
+    }
     poly_grid = sf::st_sf(
         "geometry" = boundaries,
-        data.frame("ID" = seq_along(boundaries))
+        data.frame("id" = ids)
     )
-
-    if (export) sf::st_write(poly_grid, name)
     return(poly_grid)
 }
 
