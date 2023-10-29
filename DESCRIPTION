@@ -10,7 +10,6 @@ Description: This package takes gridded data and finds all the grids that
     intersects a polygon.
 License: `use_gpl3_license()` 
 Imports:
-    ncdf4,
     raster
 Depends:
     dplyr,

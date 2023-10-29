@@ -4,7 +4,7 @@
 \alias{gridMaker}
 \title{Create grid with polygons}
 \usage{
-gridMaker(grid, crs = 4326, export = FALSE, name = "malla.shp")
+gridMaker(grid, crs = 4326)
 }
 \arguments{
 \item{grid}{Raster image or points (in a grid configuration, from lower-left
