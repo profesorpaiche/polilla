@@ -13,10 +13,10 @@
 #'
 #' @export
 
-gridMaker = function(grid, crs = 4326, export = FALSE, name = "malla.shp") {
+gridMaker = function(grid, crs = 4326) {
     # Getting corners of the boundary arean and number of grids cells
     type = class(grid)
-    if (any(type == "sfc_POINT")) {
+    if (any(type == "sf")) {
         ndims = dimensionSize(grid)
         nc = ndims[1] * ndims[2]
         grid_df = grid |> sf::st_coordinates() |> as.data.frame()
