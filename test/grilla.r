@@ -4,10 +4,10 @@ library(ncdf4)
 library(ggplot2)
 library(maps)
 
-source("../R/gridMaker.R")
-source("../R/sfCoords.R")
-source("../R/getWeights.R")
-source("../R/st_crop_extra.R")
+source("R/gridMaker.R")
+source("R/sfCoords.R")
+source("R/getWeights.R")
+source("R/extraCrop.R")
 
 # Reprojection information
 grid_north_pole_latitude = 39.25
@@ -26,7 +26,7 @@ shp = "~/data/shapes/germany/vg250_ebenen_1231/VG250_VWG.shp" |>
     st_transform(crs = crs_ortho)
 
 # Ncdf file
-nc = nc_open("cordex.nc")
+nc = nc_open("test/cordex.nc")
 gridlon = ncvar_get(nc, "lon")
 gridlat = ncvar_get(nc, "lat")
 
@@ -35,18 +35,18 @@ lonlat_sf = sfCoords(lon = gridlon, lat = gridlat, crs = 4326) |>
     st_transform(crs = crs_ortho)
 
 # Testing extended crop
-lonlat_sf = extraCrop(lonlat_sf, st_bbox(shp))
+lonlat_sf = extraCrop(lonlat_sf, shp)
 
 # Testing gridMaker
-malla_gri = gridMaker(lonlat_sf, crs = crs_ortho)
+grid_poly = gridMaker(lonlat_sf, crs = crs_ortho)
 
 # Testing getWeights
-intersection = getWeights(malla_gri, shp)
-grid = left_join(malla_gri, intersection, by = "id")
+intersection = getWeights(grid_poly, shp)
+grid_poly = left_join(grid_poly, intersection, by = "id")
 
 # test plot
 g = ggplot() +
-    geom_sf(data = grid, mapping = aes(fill = weights)) +
+    geom_sf(data = grid_poly, mapping = aes(fill = weights)) +
     geom_sf(data = shp, fill = NA) +
-    geom_sf(data = malla_gri |> st_centroid()) +
+    geom_sf(data = grid_poly |> st_centroid(), color = "royalblue") +
     geom_sf(data = lonlat_sf, color = "brown")
