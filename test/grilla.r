@@ -27,11 +27,11 @@ shp = "~/data/shapes/germany/vg250_ebenen_1231/VG250_VWG.shp" |>
 
 # Ncdf file
 nc = nc_open("cordex.nc")
-lon = ncvar_get(nc, "lon")
-lat = ncvar_get(nc, "lat")
+gridlon = ncvar_get(nc, "lon")
+gridlat = ncvar_get(nc, "lat")
 
 # Testing sfCoords
-lonlat_sf = sfCoords(lon = lon, lat = lat, crs = 4326) |>
+lonlat_sf = sfCoords(lon = gridlon, lat = gridlat, crs = 4326) |>
     st_transform(crs = crs_ortho)
 
 # Testing extended crop
