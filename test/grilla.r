@@ -1,13 +1,12 @@
+# Loading libraries and data
+library(ggplot2)
 library(dplyr)
 library(sf)
-library(ncdf4)
-library(ggplot2)
 library(maps)
-
-source("R/gridMaker.R")
-source("R/sfCoords.R")
-source("R/getWeights.R")
-source("R/extraCrop.R")
+library(polilla)
+data(shp)
+data(gridlon)
+data(gridlat)
 
 # Reprojection information
 grid_north_pole_latitude = 39.25
@@ -15,20 +14,6 @@ grid_north_pole_longitude = -162
 lat_center = 90 - grid_north_pole_latitude # displacement from the north
 lon_center = grid_north_pole_longitude + 180 # displacement from the east
 crs_ortho = paste0("+proj=ortho +lat_0=", lat_center, " +lon_0=", lon_center)
-
-# Shapefiles
-shp = "~/data/shapes/germany/vg250_ebenen_1231/VG250_VWG.shp" |>
-    st_read(
-        quiet = TRUE,
-        query = "SELECT GEN, GF FROM \"VG250_VWG\""
-    ) |>
-    filter(GEN == "Hamburg", GF == 4) |>
-    st_transform(crs = crs_ortho)
-
-# Ncdf file
-nc = nc_open("test/cordex.nc")
-gridlon = ncvar_get(nc, "lon")
-gridlat = ncvar_get(nc, "lat")
 
 # Testing sfCoords
 lonlat_sf = sfCoords(lon = gridlon, lat = gridlat, crs = 4326) |>
